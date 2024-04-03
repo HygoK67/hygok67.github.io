@@ -19,23 +19,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+    <meta name="description" content="Lab2 实验报告思考题Thinking 2.1在编写的C程序中，指针变量存储的为虚拟地址；在mips汇编中，lw和sw指令所使用的地址为虚拟地址 Thinking 2.2如果在除了内存管理以外的操作系统代码中，也需要用到链表这一数据结构的话，就可以通过定义好的链表相关的宏来快速创建一个链表，而且不用把一些基础的功能（初始化，增删等）再实现一遍了。 &#x2F;usr&#x2F;include&#x2F;sys&#x2F;queue.h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OS-Lab2实验报告.md">
+<meta property="og:url" content="http://example.com/2024/04/03/OS-Lab2%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Lab2 实验报告思考题Thinking 2.1在编写的C程序中，指针变量存储的为虚拟地址；在mips汇编中，lw和sw指令所使用的地址为虚拟地址 Thinking 2.2如果在除了内存管理以外的操作系统代码中，也需要用到链表这一数据结构的话，就可以通过定义好的链表相关的宏来快速创建一个链表，而且不用把一些基础的功能（初始化，增删等）再实现一遍了。 &#x2F;usr&#x2F;include&#x2F;sys&#x2F;queue.h">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-04-03T02:03:57.000Z">
+<meta property="article:modified_time" content="2024-04-03T02:08:05.000Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2024/04/03/OS-Lab2%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/04/03/OS-Lab2%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/","path":"2024/04/03/OS-Lab2实验报告/","title":"OS-Lab2实验报告.md"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Hexo</title>
+<title>OS-Lab2实验报告.md | Hexo</title>
   
 
 
@@ -65,7 +69,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Hexo</h1>
+      <p class="site-title">Hexo</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -87,7 +91,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -100,6 +104,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lab2-%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A"><span class="nav-number">1.</span> <span class="nav-text">Lab2 实验报告</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">思考题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-2-1"><span class="nav-number">1.1.1.</span> <span class="nav-text">Thinking 2.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-2-2"><span class="nav-number">1.1.2.</span> <span class="nav-text">Thinking 2.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-2-3"><span class="nav-number">1.1.3.</span> <span class="nav-text">Thinking 2.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-2-4"><span class="nav-number">1.1.4.</span> <span class="nav-text">Thinking 2.4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-2-5"><span class="nav-number">1.1.5.</span> <span class="nav-text">Thinking 2.5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-2-6"><span class="nav-number">1.1.6.</span> <span class="nav-text">Thinking 2.6</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E9%9A%BE%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">实验难点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">心得体会</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -129,16 +134,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/03/OS-Lab2%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -152,13 +158,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="name" content="OS-Lab2实验报告.md | Hexo">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/04/03/OS-Lab2%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/" class="post-title-link" itemprop="url">OS-Lab2实验报告.md</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          OS-Lab2实验报告.md
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -181,8 +187,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Lab2-实验报告"><a href="#Lab2-实验报告" class="headerlink" title="Lab2 实验报告"></a>Lab2 实验报告</h1><h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><h3 id="Thinking-2-1"><a href="#Thinking-2-1" class="headerlink" title="Thinking 2.1"></a>Thinking 2.1</h3><p>在编写的C程序中，指针变量存储的为虚拟地址；在mips汇编中，lw和sw指令所使用的地址为虚拟地址</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="Lab2-实验报告"><a href="#Lab2-实验报告" class="headerlink" title="Lab2 实验报告"></a>Lab2 实验报告</h1><h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><h3 id="Thinking-2-1"><a href="#Thinking-2-1" class="headerlink" title="Thinking 2.1"></a>Thinking 2.1</h3><p>在编写的C程序中，指针变量存储的为虚拟地址；在mips汇编中，lw和sw指令所使用的地址为虚拟地址</p>
 <h3 id="Thinking-2-2"><a href="#Thinking-2-2" class="headerlink" title="Thinking 2.2"></a>Thinking 2.2</h3><p>如果在除了内存管理以外的操作系统代码中，也需要用到链表这一数据结构的话，就可以通过定义好的链表相关的宏来快速创建一个链表，而且不用把一些基础的功能（初始化，增删等）再实现一遍了。</p>
 <p><code>/usr/include/sys/queue.h</code>实现的单向链表如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Singly-linked List functions.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SLIST_INIT(head) do &#123;                                           \</span></span><br><span class="line"><span class="meta">        (head)-&gt;slh_first = NULL;                                       \</span></span><br><span class="line"><span class="meta">&#125; while (<span class="comment">/*CONSTCOND*/</span>0)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SLIST_INSERT_AFTER(slistelm, elm, field) do &#123;                   \</span></span><br><span class="line"><span class="meta">        (elm)-&gt;field.sle_next = (slistelm)-&gt;field.sle_next;             \</span></span><br><span class="line"><span class="meta">        (slistelm)-&gt;field.sle_next = (elm);                             \</span></span><br><span class="line"><span class="meta">&#125; while (<span class="comment">/*CONSTCOND*/</span>0)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SLIST_INSERT_HEAD(head, elm, field) do &#123;                        \</span></span><br><span class="line"><span class="meta">        (elm)-&gt;field.sle_next = (head)-&gt;slh_first;                      \</span></span><br><span class="line"><span class="meta">        (head)-&gt;slh_first = (elm);                                      \</span></span><br><span class="line"><span class="meta">&#125; while (<span class="comment">/*CONSTCOND*/</span>0)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SLIST_REMOVE_HEAD(head, field) do &#123;                             \</span></span><br><span class="line"><span class="meta">        (head)-&gt;slh_first = (head)-&gt;slh_first-&gt;field.sle_next;          \</span></span><br><span class="line"><span class="meta">&#125; while (<span class="comment">/*CONSTCOND*/</span>0)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SLIST_REMOVE(head, elm, type, field) do &#123;                       \</span></span><br><span class="line"><span class="meta">        <span class="keyword">if</span> ((head)-&gt;slh_first == (elm)) &#123;                               \</span></span><br><span class="line"><span class="meta">                SLIST_REMOVE_HEAD((head), field);                       \</span></span><br><span class="line"><span class="meta">        &#125;                                                               \</span></span><br><span class="line"><span class="meta">        <span class="keyword">else</span> &#123;                                                          \</span></span><br><span class="line"><span class="meta">                struct type *curelm = (head)-&gt;slh_first;                \</span></span><br><span class="line"><span class="meta">                while(curelm-&gt;field.sle_next != (elm))                  \</span></span><br><span class="line"><span class="meta">                        curelm = curelm-&gt;field.sle_next;                \</span></span><br><span class="line"><span class="meta">                curelm-&gt;field.sle_next =                                \</span></span><br><span class="line"><span class="meta">                    curelm-&gt;field.sle_next-&gt;field.sle_next;             \</span></span><br><span class="line"><span class="meta">        &#125;                                                               \</span></span><br><span class="line"><span class="meta">&#125; while (<span class="comment">/*CONSTCOND*/</span>0)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SLIST_FOREACH(var, head, field)                                 \</span></span><br><span class="line"><span class="meta">        for((var) = (head)-&gt;slh_first; (var); (var) = (var)-&gt;field.sle_next)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Singly-linked List access methods.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SLIST_EMPTY(head)       ((head)-&gt;slh_first == NULL)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SLIST_FIRST(head)       ((head)-&gt;slh_first)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SLIST_NEXT(elm, field)  ((elm)-&gt;field.sle_next)</span></span><br></pre></td></tr></table></figure>
@@ -253,7 +258,6 @@
 <p>成功输出初始化信息，证明 <code>square</code> 函数在 <code>start.S</code> 中被正确调用了</p>
 <h2 id="心得体会"><a href="#心得体会" class="headerlink" title="心得体会"></a>心得体会</h2><p>此次实验中，首先是进一步了解了c语言的编译、链接过程。对c语言和汇编语言之间的关系认识的更加清晰了（我自己感觉c语言就是大号汇编）。最最重要的是，认识了mips体系架构下的内存管理机制，例如内核段的虚拟&#x2F;物理地址变换机制，页表查询维护的机制，tlb重填的相关机制和指令等等。但是对于真正的用户态下的程序访问物理内存的流程并不熟悉，需要继续学习。</p>
 
-      
     </div>
 
     
@@ -261,284 +265,22 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/04/01/Lab1%20%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/" rel="prev" title="lab1">
+                  <i class="fa fa-angle-left"></i> lab1
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/01/Lab1%20%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Hexo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/04/01/Lab1%20%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/" class="post-title-link" itemprop="url">lab1</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2024-04-01 08:43:39 / Modified: 08:45:45" itemprop="dateCreated datePublished" datetime="2024-04-01T08:43:39+00:00">2024-04-01</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Lab1-实验报告"><a href="#Lab1-实验报告" class="headerlink" title="Lab1 实验报告"></a>Lab1 实验报告</h1><h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><h3 id="Thinking-1-1"><a href="#Thinking-1-1" class="headerlink" title="Thinking 1.1"></a>Thinking 1.1</h3><p>现有一c语言程序<code>hello.c</code>:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>首先，使用x86原生工具链对其进行编译生成可链接的目标文件<code>hello_x86.o</code>，随后用同样的工具编译并链接生成可执行文件<code>hello_x86</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -c -o hello_x86.o hello.c</span><br><span class="line">gcc -o hello_x86 hello.c</span><br></pre></td></tr></table></figure>
-
-<p>然后使用x86原生的<code>objdump</code>工具将上述两个文件进行反汇编并导出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">objdump -DS hello_x86.o &gt; dumped/hello_x86_relo_dump_with_dash_DS.txt</span><br><span class="line">objdump -DS hello_x86 &gt; dumped/hello_x86_exe_dump_with_dash_DS.txt</span><br></pre></td></tr></table></figure>
-
-<p>获得x86原生的elf文件以及反汇编结果以后，再使用mips交叉编译链的工具对<code>hello.c</code>进行同样的编译和链接操作：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mips-linux-gnu-gcc -c -o hello_mips.o hello.c</span><br><span class="line">mips-linux-gnu-gcc -o hello_mips hello.c</span><br></pre></td></tr></table></figure>
-
-<p>再使用交叉编译链的工具将上述两个elf文件进行反汇编并导出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mips-linux-gnu-objdump -DS hello_mips.o &gt; dumped/hello_mips_relo_dump_with_dash_DS.txt</span><br><span class="line">mips-linux-gnu-objdump -DS hello_mips &gt; dumped/hello_mips_exe_dump_with_dash_DS.txt</span><br></pre></td></tr></table></figure>
-
-<p>值得注意的是，如果尝试用x86原生的工具<code>objdump</code>去反汇编交叉编译出的mips可执行文件的话：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">objdump -DS hello_mips.o 或 objdump -DS hello_mips</span><br></pre></td></tr></table></figure>
-
-<p>就会报错：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hello_mips:     file format elf32-big</span><br><span class="line"></span><br><span class="line">objdump: can&#x27;t disassemble for architecture UNKNOWN!</span><br></pre></td></tr></table></figure>
-
-<p>提示未知的体系结构</p>
-<p>在对各个elf文件进行反汇编以后，将输出的结果截取main section如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-----dumped/hello_x86_relo_dump_with_dash_DS.txt-----</span><br><span class="line"></span><br><span class="line">0000000000000000 &lt;main&gt;:</span><br><span class="line">   0:	f3 0f 1e fa          	endbr64 </span><br><span class="line">   4:	55                   	push   %rbp</span><br><span class="line">   5:	48 89 e5             	mov    %rsp,%rbp</span><br><span class="line">   8:	48 8d 05 00 00 00 00 	lea    0x0(%rip),%rax        # f &lt;main+0xf&gt;</span><br><span class="line">   f:	48 89 c7             	mov    %rax,%rdi</span><br><span class="line">  12:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line">  17:	e8 00 00 00 00       	call   1c &lt;main+0x1c&gt;</span><br><span class="line">  1c:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line">  21:	5d                   	pop    %rbp</span><br><span class="line">  22:	c3                   	ret</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-----dumped/hello_x86_exe_dump_with_dash_DS.txt-----</span><br><span class="line"></span><br><span class="line">0000000000001149 &lt;main&gt;:</span><br><span class="line">    1149:	f3 0f 1e fa          	endbr64 </span><br><span class="line">    114d:	55                   	push   %rbp</span><br><span class="line">    114e:	48 89 e5             	mov    %rsp,%rbp</span><br><span class="line">    1151:	48 8d 05 ac 0e 00 00 	lea    0xeac(%rip),%rax        # 2004 &lt;_IO_stdin_used+0x4&gt;</span><br><span class="line">    1158:	48 89 c7             	mov    %rax,%rdi</span><br><span class="line">    115b:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line">    1160:	e8 eb fe ff ff       	call   1050 &lt;printf@plt&gt;</span><br><span class="line">    1165:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line">    116a:	5d                   	pop    %rbp</span><br><span class="line">    116b:	c3                   	ret</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">-----dumped/hello_mips_relo_dump_with_dash_DS.txt-----</span><br><span class="line"></span><br><span class="line">00000000 &lt;main&gt;:</span><br><span class="line">   0:	27bdffe0 	addiu	sp,sp,-32</span><br><span class="line">   4:	afbf001c 	sw	ra,28(sp)</span><br><span class="line">   8:	afbe0018 	sw	s8,24(sp)</span><br><span class="line">   c:	03a0f025 	move	s8,sp</span><br><span class="line">  10:	3c1c0000 	lui	gp,0x0</span><br><span class="line">  14:	279c0000 	addiu	gp,gp,0</span><br><span class="line">  18:	afbc0010 	sw	gp,16(sp)</span><br><span class="line">  1c:	3c020000 	lui	v0,0x0</span><br><span class="line">  20:	24440000 	addiu	a0,v0,0</span><br><span class="line">  24:	8f820000 	lw	v0,0(gp)</span><br><span class="line">  28:	0040c825 	move	t9,v0</span><br><span class="line">  2c:	0320f809 	jalr	t9</span><br><span class="line">  30:	00000000 	nop</span><br><span class="line">  34:	8fdc0010 	lw	gp,16(s8)</span><br><span class="line">  38:	00001025 	move	v0,zero</span><br><span class="line">  3c:	03c0e825 	move	sp,s8</span><br><span class="line">  40:	8fbf001c 	lw	ra,28(sp)</span><br><span class="line">  44:	8fbe0018 	lw	s8,24(sp)</span><br><span class="line">  48:	27bd0020 	addiu	sp,sp,32</span><br><span class="line">  4c:	03e00008 	jr	ra</span><br><span class="line">  50:	00000000 	nop</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">-----dumped/hello_mips_exe_dump_with_dash_DS.txt-----</span><br><span class="line"></span><br><span class="line">004006e0 &lt;main&gt;:</span><br><span class="line">  4006e0:	27bdffe0 	addiu	sp,sp,-32</span><br><span class="line">  4006e4:	afbf001c 	sw	ra,28(sp)</span><br><span class="line">  4006e8:	afbe0018 	sw	s8,24(sp)</span><br><span class="line">  4006ec:	03a0f025 	move	s8,sp</span><br><span class="line">  4006f0:	3c1c0042 	lui	gp,0x42</span><br><span class="line">  4006f4:	279c9010 	addiu	gp,gp,-28656</span><br><span class="line">  4006f8:	afbc0010 	sw	gp,16(sp)</span><br><span class="line">  4006fc:	3c020040 	lui	v0,0x40</span><br><span class="line">  400700:	24440830 	addiu	a0,v0,2096</span><br><span class="line">  400704:	8f828030 	lw	v0,-32720(gp)</span><br><span class="line">  400708:	0040c825 	move	t9,v0</span><br><span class="line">  40070c:	0320f809 	jalr	t9</span><br><span class="line">  400710:	00000000 	nop</span><br><span class="line">  400714:	8fdc0010 	lw	gp,16(s8)</span><br><span class="line">  400718:	00001025 	move	v0,zero</span><br><span class="line">  40071c:	03c0e825 	move	sp,s8</span><br><span class="line">  400720:	8fbf001c 	lw	ra,28(sp)</span><br><span class="line">  400724:	8fbe0018 	lw	s8,24(sp)</span><br><span class="line">  400728:	27bd0020 	addiu	sp,sp,32</span><br><span class="line">  40072c:	03e00008 	jr	ra</span><br><span class="line">  400730:	00000000 	nop</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，两个体系结构的反汇编结果体现了RICS&#x2F;CISC的特点（指令定长&#x2F;不定长，指令复杂度和数量）。</p>
-<p>除此之外，观察两个体系结构在链接前后的反汇编结果，尤其是调用printf函数的部分，这里截取如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">---x86---</span><br><span class="line">before link：</span><br><span class="line">  17:	e8 00 00 00 00       	call   1c &lt;main+0x1c&gt;</span><br><span class="line">after link：</span><br><span class="line">1160:	e8 eb fe ff ff       	call   1050 &lt;printf@plt&gt;</span><br><span class="line"></span><br><span class="line">--mips---</span><br><span class="line">before link:</span><br><span class="line">  24:	8f820000 	lw	v0,0(gp)</span><br><span class="line">  28:	0040c825 	move	t9,v0</span><br><span class="line">  2c:	0320f809 	jalr	t9</span><br><span class="line">after link:</span><br><span class="line">  400704:	8f828030 	lw	v0,-32720(gp)</span><br><span class="line">  400708:	0040c825 	move	t9,v0</span><br><span class="line">  40070c:	0320f809 	jalr	t9</span><br></pre></td></tr></table></figure>
-
-<p>对上述代码进行分析后得出结论，x86架构在链接后直接往call指令添加了地址，而mips则是通过修改lw指令的偏移量来取得真实的跳转地址的</p>
-<p>对于objdump工具的参数含义，经过<code>man objdump</code>可以知道，其中D参数代表<code>disassemble all</code>，也即对所有的section都尝试进行反汇编，不论其是否是传统意义上存放代码的section。而S参数则代表如果可能的话，将原始代码与反汇编的结果混合显示。</p>
-<h3 id="Thinking-1-2"><a href="#Thinking-1-2" class="headerlink" title="Thinking 1.2"></a>Thinking 1.2</h3><p>当处在项目根目录时，首先使用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make --directory=tools/readelf</span><br></pre></td></tr></table></figure>
-
-<p>命令构建自己编写的readelf工具的可执行文件，然后调用该工具来解析生成的mos内核文件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tools/readelf/readelf target/mos</span><br></pre></td></tr></table></figure>
-
-<p>结果如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">0:0x0</span><br><span class="line">1:0x80020000</span><br><span class="line">2:0x80022080</span><br><span class="line">3:0x80022098</span><br><span class="line">4:0x800220b0</span><br><span class="line">5:0x0</span><br><span class="line">6:0x0</span><br><span class="line">7:0x0</span><br><span class="line">8:0x0</span><br><span class="line">9:0x0</span><br><span class="line">10:0x0</span><br><span class="line">11:0x0</span><br><span class="line">12:0x0</span><br><span class="line">13:0x0</span><br><span class="line">14:0x0</span><br><span class="line">15:0x0</span><br><span class="line">16:0x0</span><br></pre></td></tr></table></figure>
-
-<p>如果调用系统的<code>readelf</code>工具对mos内核进行解析</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">readelf target/mos</span><br></pre></td></tr></table></figure>
-
-<p>则结果是</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">There are 17 section headers, starting at offset 0x5bdc:</span><br><span class="line"></span><br><span class="line">Section Headers:</span><br><span class="line">  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al</span><br><span class="line">  [ 0]                   NULL            00000000 000000 000000 00      0   0  0</span><br><span class="line">  [ 1] .text             PROGBITS        80020000 0000c0 002080 00 WAX  0   0 16</span><br><span class="line">  [ 2] .reginfo          MIPS_REGINFO    80022080 002140 000018 18   A  0   0  4</span><br><span class="line">  [ 3] .MIPS.abiflags    MIPS_ABIFLAGS   80022098 002158 000018 18   A  0   0  8</span><br><span class="line">  [ 4] .rodata           PROGBITS        800220b0 002170 0004b0 00   A  0   0 16</span><br><span class="line">  [ 5] .pdr              PROGBITS        00000000 002620 0002e0 00      0   0  4</span><br><span class="line">  [ 6] .comment          PROGBITS        00000000 002900 000025 01  MS  0   0  1</span><br><span class="line">  [ 7] .gnu.attributes   GNU_ATTRIBUTES  00000000 002925 000010 00      0   0  1</span><br><span class="line">  [ 8] .debug_info       MIPS_DWARF      00000000 002935 0010c8 00      0   0  1</span><br><span class="line">  [ 9] .debug_abbrev     MIPS_DWARF      00000000 0039fd 00066b 00      0   0  1</span><br><span class="line">  [10] .debug_aranges    MIPS_DWARF      00000000 004068 000100 00      0   0  8</span><br><span class="line">  [11] .debug_line       MIPS_DWARF      00000000 004168 000b84 00      0   0  1</span><br><span class="line">  [12] .debug_str        MIPS_DWARF      00000000 004cec 0005ad 01  MS  0   0  1</span><br><span class="line">  [13] .debug_frame      MIPS_DWARF      00000000 00529c 0003b4 00      0   0  4</span><br><span class="line">  [14] .symtab           SYMTAB          00000000 005650 000340 10     15  31  4</span><br><span class="line">  [15] .strtab           STRTAB          00000000 005990 00019e 00      0   0  1</span><br><span class="line">  [16] .shstrtab         STRTAB          00000000 005b2e 0000ac 00      0   0  1</span><br></pre></td></tr></table></figure>
-
-<p>上述结果验证了我们编写的这个工具在mos内核上的解析是正确的</p>
-<p> 使用系统的readelf工具对生成的可执行文件hello进行解析（提取header）:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">readelf -h tools/readelf/hello</span><br></pre></td></tr></table></figure>
-
-<p>其结果为</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">ELF Header:</span><br><span class="line">  Magic:   7f 45 4c 46 01 01 01 03 00 00 00 00 00 00 00 00 </span><br><span class="line">  Class:                             ELF32</span><br><span class="line">  Data:                              2&#x27;s complement, little endian</span><br><span class="line">  Version:                           1 (current)</span><br><span class="line">  OS/ABI:                            UNIX - GNU</span><br><span class="line">  ABI Version:                       0</span><br><span class="line">  Type:                              EXEC (Executable file)</span><br><span class="line">  Machine:                           Intel 80386</span><br><span class="line">  Version:                           0x1</span><br><span class="line">  Entry point address:               0x8049600</span><br><span class="line">  Start of program headers:          52 (bytes into file)</span><br><span class="line">  Start of section headers:          746312 (bytes into file)</span><br><span class="line">  Flags:                             0x0</span><br><span class="line">  Size of this header:               52 (bytes)</span><br><span class="line">  Size of program headers:           32 (bytes)</span><br><span class="line">  Number of program headers:         8</span><br><span class="line">  Size of section headers:           40 (bytes)</span><br><span class="line">  Number of section headers:         35</span><br><span class="line">  Section header string table index: 34</span><br></pre></td></tr></table></figure>
-
-<p>再使用系统的readelf工具对我们自己编写的readelf可执行进行解析（提取header）:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">readelf -h tools/readelf/readelf</span><br></pre></td></tr></table></figure>
-
-<p>结果是：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">ELF Header:</span><br><span class="line">  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 </span><br><span class="line">  Class:                             ELF64</span><br><span class="line">  Data:                              2&#x27;s complement, little endian</span><br><span class="line">  Version:                           1 (current)</span><br><span class="line">  OS/ABI:                            UNIX - System V</span><br><span class="line">  ABI Version:                       0</span><br><span class="line">  Type:                              DYN (Position-Independent Executable file)</span><br><span class="line">  Machine:                           Advanced Micro Devices X86-64</span><br><span class="line">  Version:                           0x1</span><br><span class="line">  Entry point address:               0x1180</span><br><span class="line">  Start of program headers:          64 (bytes into file)</span><br><span class="line">  Start of section headers:          14488 (bytes into file)</span><br><span class="line">  Flags:                             0x0</span><br><span class="line">  Size of this header:               64 (bytes)</span><br><span class="line">  Size of program headers:           56 (bytes)</span><br><span class="line">  Number of program headers:         13</span><br><span class="line">  Size of section headers:           64 (bytes)</span><br><span class="line">  Number of section headers:         31</span><br><span class="line">  Section header string table index: 30</span><br></pre></td></tr></table></figure>
-
-<p>这样看来结果已经呼之欲出了：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Class:                             ELF32</span><br><span class="line">Class:                             ELF64</span><br></pre></td></tr></table></figure>
-
-<p>我们编写的readelf被设计为解析32位的程序，<code>hello</code>这个可执行程序是32位的，其可以解析；而readelf其自身是64位的，因此其不能够解析自身</p>
-<h3 id="Thinking-1-3"><a href="#Thinking-1-3" class="headerlink" title="Thinking 1.3"></a>Thinking 1.3</h3><p>在真实的物理机上启动操作系统时，会有bootloader程序先进行硬件初始化等一系列工作，保证计算机已经存在一个基本的运行时，才会把操作权转交给内核，跳转到内核的入口。在qemu模拟器上也是如此，只不过因为其实qemu是一个软件，bootloader的工作已经被qemu完成了，qemu会保证后续的执行过程中会跳转到内核的入口。这样的设计使得我们感觉好像虚拟机一开机就可以直接运行内核。</p>
-<h2 id="难点分析"><a href="#难点分析" class="headerlink" title="难点分析"></a>难点分析</h2><ol>
-<li><p>在编写readelf工具的过程中，我注意到在使用地址偏移量计算地址的时候，应注意c语言指针的运算行为。例如如下的代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void* p1;</span><br><span class="line">void* p2;</span><br><span class="line">int num = 1234;</span><br><span class="line">int* pn = &amp;num;</span><br><span class="line">int offset = 4;</span><br><span class="line">p1 = pn + offset;</span><br><span class="line">p2 = (void*) pn + offset;</span><br></pre></td></tr></table></figure>
-
-<p>假设pn（即变量num的地址）为 0x10000，则</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p1 = 0x10010</span><br><span class="line">p2 = 0x10004</span><br></pre></td></tr></table></figure>
-
-<p>参与运算的指针的类型会影响计算的结果。如果是一个指针类型与一个整数类型相加，则最终的结果与原来指针的地址值的差值等于指针所指的数据类型的大小（例如在64位系统上short为2，int为4等）再乘以整数的值。</p>
-<p>上面的例子中，pn是int类型的指针，所以<code>p1-pn=0x10=offset*sizeof(int)=4*4</code>，而经过强转后<code>(void*) pn</code>变为void类型的指针，有<code>p2-pn=0x04=offset*sizeof(void)=4*1</code></p>
-<p>根据此，在确定节头表的地址的地址时候，应该先将获得的基址变为void*类型再做运算：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh_table = (void*)ehdr + ehdr-&gt;e_shoff;</span><br></pre></td></tr></table></figure>
-
-<p>而在确定某一个表项的地址的时候，又应该把节头表的地址转化为表项的指针类型再进行运算：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shdr = ((Elf32_Shdr*) sh_table) + i;</span><br></pre></td></tr></table></figure>
-
-<p>最后再根据这个表项来确定具体的某一个节的地址：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addr = shdr-&gt;sh_addr;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在编写<code>start.S</code>时，需要注意到到栈是从高地址向低地址增长的，因此sp指针一开始指向的应该是kernel stack可用的地址的最高处，也即<code>0x80400000</code></p>
-<p>除此之外，<code>start.S</code>的最后需要跳转到<code>mips_init</code>函数，我注意到，如果使用jal跳转并链接的话，qemu仿真就只会执行一遍printk函数，但如果将其改成j只跳转不链接的话，qemu仿真就会无限调用printk函数进行输出。这里用gdb工具对该现象出现的原因进行探究：</p>
-<p>首先，使用make dbg进入gdb环境，然后使用命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">break clear_bss_loop</span><br></pre></td></tr></table></figure>
-
-<p>在 <code>start.S</code> 的 <code>clear_bss_loop</code> 标签处打一个断点，这样做主要是因为这是离我们所要研究的目标跳转指令最近的一个tag，随后一直next直到程序运行到</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">j       mips_init</span><br></pre></td></tr></table></figure>
-
-<p>这条指令执行之前。</p>
-<p>使用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i registers</span><br></pre></td></tr></table></figure>
-
-<p>查看此时的寄存器状态：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">        zero       at       v0       v1       a0       a1       a2       a3</span><br><span class="line">R0   00000000 00000000 80021b60 80021b60 00000002 80002000 80002008 04000000 </span><br><span class="line">           t0       t1       t2       t3       t4       t5       t6       t7</span><br><span class="line">R8   0000005e bbe00000 00000000 00000000 00000000 00000000 00000000 00000000 </span><br><span class="line">           s0       s1       s2       s3       s4       s5       s6       s7</span><br><span class="line">R16  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 </span><br><span class="line">           t8       t9       k0       k1       gp       sp       s8       ra</span><br><span class="line">R24  00000000 00000000 00000000 00000000 00000000 80400000 00000000 800214c0 </span><br><span class="line">           sr       lo       hi      bad    cause       pc</span><br><span class="line">     00000000 00000000 00000000 00000000 00000000 800214f4 </span><br><span class="line">          fsr      fir</span><br><span class="line">     00000000 00000000</span><br></pre></td></tr></table></figure>
-
-<p>主要关注两个寄存器，pc和ra，其值分别为</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$PC: 800214f4</span><br><span class="line">$RA: 800214c0</span><br></pre></td></tr></table></figure>
-
-<p>随后进入到<code>mips_init</code>函数中，执行<code>printk</code>函数，执行完毕后返回<code>$RA</code>所指向的地址，可以发现返回到了<code>start.S</code>文件的开头:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">_start () at start.S:10</span><br><span class="line">10              la      v0, bss_start</span><br></pre></td></tr></table></figure>
-
-<p>此时的寄存器状态：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">         zero       at       v0       v1       a0       a1       a2       a3</span><br><span class="line">R0   00000000 00000000 00000000 00000000 0000000d 80021a2d 00000001 803fffec </span><br><span class="line">           t0       t1       t2       t3       t4       t5       t6       t7</span><br><span class="line">R8   0000005e bbe00000 00000000 00000000 00000000 00000000 00000000 00000000 </span><br><span class="line">           s0       s1       s2       s3       s4       s5       s6       s7</span><br><span class="line">R16  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 </span><br><span class="line">           t8       t9       k0       k1       gp       sp       s8       ra</span><br><span class="line">R24  00000000 00000000 00000000 00000000 00000000 80400000 00000000 800214c0 </span><br><span class="line">           sr       lo       hi      bad    cause       pc</span><br><span class="line">     00000000 00000000 00000000 00000000 00000000 800214c0 </span><br><span class="line">          fsr      fir</span><br><span class="line">     00000000 00000000</span><br></pre></td></tr></table></figure>
-
-<p>可以发现<code>$PC=$RA</code></p>
-<p>随后一直运行直到 <code>mips_init</code>函数之前，查看寄存器的状态，发现与上个周期查看的状态相同。由此便产生了循环：每当<code>mips_init</code>执行完毕，都会跳转到<code>start.S</code>的开头，然后又跳转到<code>mips_init</code>。</p>
-<p>然后将 <code>start.S</code> 中的跳转j变为跳转并链接jal，也是通过gdb设置断点并一直运行到</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jal     mips_init</span><br></pre></td></tr></table></figure>
-
-<p>指令，此时查看寄存器状态，可以得到</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">         zero       at       v0       v1       a0       a1       a2       a3</span><br><span class="line">R0   00000000 00000000 80021b60 80021b60 00000002 80002000 80002008 04000000 </span><br><span class="line">           t0       t1       t2       t3       t4       t5       t6       t7</span><br><span class="line">R8   0000005e bbe00000 00000000 00000000 00000000 00000000 00000000 00000000 </span><br><span class="line">           s0       s1       s2       s3       s4       s5       s6       s7</span><br><span class="line">R16  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 </span><br><span class="line">           t8       t9       k0       k1       gp       sp       s8       ra</span><br><span class="line">R24  00000000 00000000 00000000 00000000 00000000 80400000 00000000 800214c0 </span><br><span class="line">           sr       lo       hi      bad    cause       pc</span><br><span class="line">     00000000 00000000 00000000 00000000 00000000 800214f4 </span><br><span class="line">          fsr      fir</span><br><span class="line">     00000000 00000000</span><br></pre></td></tr></table></figure>
-
-<p>到目前为止，和使用j指令的结果是一模一样的。然后next单步运行，再查看寄存器状态：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">         zero       at       v0       v1       a0       a1       a2       a3</span><br><span class="line">R0   00000000 00000000 00000000 00000000 0000000d 80021a2d 00000001 803fffec </span><br><span class="line">           t0       t1       t2       t3       t4       t5       t6       t7</span><br><span class="line">R8   0000005e bbe00000 00000000 00000000 00000000 00000000 00000000 00000000 </span><br><span class="line">           s0       s1       s2       s3       s4       s5       s6       s7</span><br><span class="line">R16  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 </span><br><span class="line">           t8       t9       k0       k1       gp       sp       s8       ra</span><br><span class="line">R24  00000000 00000000 00000000 00000000 00000000 80400000 00000000 800214fc </span><br><span class="line">           sr       lo       hi      bad    cause       pc</span><br><span class="line">     00000000 00000000 00000000 00000000 00000000 800214fc </span><br><span class="line">          fsr      fir</span><br><span class="line">     00000000 00000000</span><br></pre></td></tr></table></figure>
-
-<p>此时发现，ra已经变为了jal指令的下一条指令的地址，因此不会出现死循环。</p>
-<p>最后一个有意思的问题就是，一开始的ra寄存器中的地址，是由哪条代码存到ra中的呢？因为在start.S内，没见到有直接操作ra寄存器的代码，除了最后，也没有jal指令，因此ra寄存器中的值一定是在进入到start.S之前就被设置好的，这里我猜测是bootloader在跳转到内核之前进行的操作。</p>
-</li>
-</ol>
-<h2 id="心得体会"><a href="#心得体会" class="headerlink" title="心得体会"></a>心得体会</h2><p>在本次实验中，我主要有有以下几点收获</p>
-<ol>
-<li>了解并熟悉了操作系统启动的大致流程。同时在编写内核代码的过程中，学习了内核的大致结构，各个模块的组织方式，代码的运行顺序等等。</li>
-<li>通过对elf文件的解析了解了c语言程序预处理、编译、链接的整体流程，并注意到程序的体系结构特异性。</li>
-<li>进一步学习熟悉相关工具链，例如make，gdb，qemu，gcc，objdump，readelf，mips-linux-gnu-xxx等</li>
-<li>通过编写<code>printk</code>函数了解了c语言库函数 <code>printf()</code> 更高级的用法，以及大致了解了格式化输出的实现方式。同时也学习了c语言的变参数个数的写法与特性。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/01/hello/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Hexo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/04/01/hello/" class="post-title-link" itemprop="url">hello</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2024-04-01 04:33:56 / Modified: 04:34:51" itemprop="dateCreated datePublished" datetime="2024-04-01T04:33:56+00:00">2024-04-01</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to hygok67’s blog!</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
 
 
