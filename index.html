@@ -112,7 +112,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -130,6 +130,326 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/02/Lab4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/05/02/Lab4/" class="post-title-link" itemprop="url">Lab4</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-05-02 02:28:28 / Modified: 02:56:28" itemprop="dateCreated datePublished" datetime="2024-05-02T02:28:28+00:00">2024-05-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Lab4-实验报告"><a href="#Lab4-实验报告" class="headerlink" title="Lab4 实验报告"></a>Lab4 实验报告</h1><h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><h3 id="Thinking-4-1"><a href="#Thinking-4-1" class="headerlink" title="Thinking 4.1"></a>Thinking 4.1</h3><p>用户进程进行系统调用时，跳转到内核态的 <code>exc_gen_entry</code> 函数:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// kern/entry.S</span><br><span class="line"></span><br><span class="line">exc_gen_entry:</span><br><span class="line">	SAVE_ALL</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
+
+<p>该函数做的第一件事情就是用 SAVE_ALL 宏保存用户进程的上下文，<code>SAVE_ALL</code> 的定义如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">// include/stackframe.h</span><br><span class="line"></span><br><span class="line">.macro SAVE_ALL</span><br><span class="line">.set noat       //禁止汇编器使用 at 寄存器，因为 at 寄存器也需要被保存，不能发生变化</span><br><span class="line">.set noreorder  //禁止汇编器重排序优化，防止出现非预期行为</span><br><span class="line">	mfc0    k0, CP0_STATUS </span><br><span class="line">	andi    k0, STATUS_UM //获得UM标志位信息，来检查系统是否是在内核态产生的异常</span><br><span class="line">	beqz    k0, 1f  //如果是在内核态产生的异常（UM标志位为低），就直接跳转走</span><br><span class="line">	move    k0, sp  //如果是用户态异常，那么先用k0寄存器保存用户态sp寄存器的值</span><br><span class="line">	/*</span><br><span class="line">	* If STATUS_UM is not set, the exception was triggered in kernel mode.</span><br><span class="line">	* $sp is already a kernel stack pointer, we don&#x27;t need to set it again.</span><br><span class="line">	*/</span><br><span class="line">	li      sp, KSTACKTOP //然后把sp设置为内核栈的栈顶</span><br><span class="line">1:</span><br><span class="line">	subu    sp, sp, TF_SIZE //移动sp指针，为整个trapframe预留出空间</span><br><span class="line">	sw      k0, TF_REG29(sp) //把刚才保存的用户态sp寄存器的值存到trapframe相应的位置中去</span><br><span class="line">	mfc0    k0, CP0_STATUS</span><br><span class="line">	sw      k0, TF_STATUS(sp) //利用k0寄存器作为跳板，将cp0中各个寄存器的值都保存到内核栈上</span><br><span class="line">	mfc0    k0, CP0_CAUSE</span><br><span class="line">	sw      k0, TF_CAUSE(sp)</span><br><span class="line">	mfc0    k0, CP0_EPC</span><br><span class="line">	sw      k0, TF_EPC(sp)</span><br><span class="line">	mfc0    k0, CP0_BADVADDR</span><br><span class="line">	sw      k0, TF_BADVADDR(sp)</span><br><span class="line">	mfhi    k0           //利用k0寄存器作为跳板，将乘除法模块中HI和LO寄存器的值都保存到内核栈上</span><br><span class="line">	sw      k0, TF_HI(sp)</span><br><span class="line">	mflo    k0</span><br><span class="line">	sw      k0, TF_LO(sp)</span><br><span class="line">	sw      $0, TF_REG0(sp)   //在这里开始保存CPU的各个通用寄存器的值到内核栈上</span><br><span class="line">	sw      $1, TF_REG1(sp)</span><br><span class="line">	sw      $2, TF_REG2(sp)</span><br><span class="line">	sw      $3, TF_REG3(sp)</span><br><span class="line">	sw      $4, TF_REG4(sp)</span><br><span class="line">	sw      $5, TF_REG5(sp)</span><br><span class="line">	sw      $6, TF_REG6(sp)</span><br><span class="line">	sw      $7, TF_REG7(sp)</span><br><span class="line">	sw      $8, TF_REG8(sp)</span><br><span class="line">	sw      $9, TF_REG9(sp)</span><br><span class="line">	sw      $10, TF_REG10(sp)</span><br><span class="line">	sw      $11, TF_REG11(sp)</span><br><span class="line">	sw      $12, TF_REG12(sp)</span><br><span class="line">	sw      $13, TF_REG13(sp)</span><br><span class="line">	sw      $14, TF_REG14(sp)</span><br><span class="line">	sw      $15, TF_REG15(sp)</span><br><span class="line">	sw      $16, TF_REG16(sp)</span><br><span class="line">	sw      $17, TF_REG17(sp)</span><br><span class="line">	sw      $18, TF_REG18(sp)</span><br><span class="line">	sw      $19, TF_REG19(sp)</span><br><span class="line">	sw      $20, TF_REG20(sp)</span><br><span class="line">	sw      $21, TF_REG21(sp)</span><br><span class="line">	sw      $22, TF_REG22(sp)</span><br><span class="line">	sw      $23, TF_REG23(sp)</span><br><span class="line">	sw      $24, TF_REG24(sp)</span><br><span class="line">	sw      $25, TF_REG25(sp)</span><br><span class="line">	sw      $26, TF_REG26(sp)</span><br><span class="line">	sw      $27, TF_REG27(sp)</span><br><span class="line">	sw      $28, TF_REG28(sp) //这里没有保存29号寄存器（sp寄存器），因为当前cpu中的sp指向内核栈地址，</span><br><span class="line">	                          //而需要保存的用户态sp的值已经利用k0作为跳板保存到栈上了</span><br><span class="line">	sw      $30, TF_REG30(sp)</span><br><span class="line">	sw      $31, TF_REG31(sp)</span><br><span class="line">.set at</span><br><span class="line">.set reorder</span><br><span class="line">.endm</span><br></pre></td></tr></table></figure>
+
+<p>根据以上保存上下文的过程可以看出来，除了 <code>$sp</code> 和 <code>$k0</code> 寄存器以外，其他的所有通用寄存器从发生异常到被保存到栈上的整个过程中，都没有发生改变，得到了保护。对于 <code>$sp</code> 寄存器而言，利用 <code>$k0</code> 寄存器作为跳板，也把其在用户态时的值保存到了栈上。唯一受到破坏的寄存器是 <code>$k0</code> 寄存器，但该寄存器本身是操作系统内核专用的，因此也不需要保存其在用户态时的值。</p>
+<p>在保存完现场之后，内核接着根据 CP0 的 CAUSE 寄存器来查看产生异常的原因</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// kern/entry.S</span><br><span class="line"></span><br><span class="line">SAVE_ALL</span><br><span class="line">mfc0    t0, CP0_STATUS</span><br><span class="line">and     t0, t0, ~(STATUS_UM | STATUS_EXL | STATUS_IE)</span><br><span class="line">mtc0    t0, CP0_STATUS</span><br><span class="line">mfc0    t0, CP0_CAUSE  </span><br><span class="line">andi    t0, 0x7c       </span><br><span class="line">lw      t0, exception_handlers(t0) </span><br><span class="line">jr      t0   </span><br></pre></td></tr></table></figure>
+
+<p>这里使用到了 <code>$t0</code> 寄存器。根据异常原因在异常函数表里寻找相应的处理函数，在 <code>jr</code> 跳转到某个 handle 函数后（以系统调用的处理函数为例，并且这里把宏进行了展开）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// kern/genex.S</span><br><span class="line"></span><br><span class="line">NESTED(handle_sys, TF_SIZE + 8, zero)</span><br><span class="line">	move    a0, sp</span><br><span class="line">	addiu   sp, sp, -8</span><br><span class="line">	jal     do_syscall</span><br><span class="line">	addiu   sp, sp, 8</span><br><span class="line">	j       ret_from_exception</span><br><span class="line">END(handle_sys)</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，在这里，<code>$a0</code> 寄存器的值被覆写为 <code>$sp</code> 寄存器的值。然后该函数进一步跳转到 <code>do_syscall</code> 函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// kern/syscall_all.c</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">do_syscall</span><span class="params">(<span class="keyword">struct</span> Trapframe *tf)</span> &#123;</span><br><span class="line">	</span><br><span class="line">	...</span><br><span class="line">	<span class="type">int</span> sysno = tf-&gt;regs[<span class="number">4</span>];</span><br><span class="line">	...</span><br><span class="line">	u_int arg1 = tf-&gt;regs[<span class="number">5</span>];</span><br><span class="line">	u_int arg2 = tf-&gt;regs[<span class="number">6</span>];</span><br><span class="line">	u_int arg3 = tf-&gt;regs[<span class="number">7</span>];</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在该函数里，从内核栈上取得之前保存的从用户态传来的 <code>$a0, $a1, $a2, $a3</code> 这四个寄存器的值。</p>
+<p>根据以上的分析，由于 <code>$a0</code> 被显式地更改为了内核栈针的地址，因此无法直接从该寄存器中获得用户传来的参数。与此同时，从进入内核到开始异常处理的整个的过程中，都不涉及对 <code>$a1,$a2,$a3</code> 这三个寄存器的写入操作，所以理论上来讲可以直接通过这三个寄存器的值来获取对应的系统调用参数。</p>
+<p>不管是直接读取寄存器的值还是读取保存到栈针中的寄存器的值，总之在内核态能够获取到用户传来的所有系统调用参数，把这些参数传给以 sys 开头的某个具体的系统调用函数，就能够让这些函数认为内核提供了和用户调用 <code>msyscall</code> 时一模一样的参数。</p>
+<p>在系统调用的处理函数中，对栈针进行了如下这些操作，解释都写在注释中了：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// kern/syscall_all.c</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">do_syscall</span><span class="params">(<span class="keyword">struct</span> Trapframe *tf)</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (sysno &lt; <span class="number">0</span> || sysno &gt;= MAX_SYSNO) &#123; </span><br><span class="line">		<span class="comment">//如果系统调用号不符合要求，那么把栈针中的 v0 寄存器置为一个负的错误码，</span></span><br><span class="line">		<span class="comment">//对应于用户进程里的某个系统调用函数返回了一个错误码，以便用户进行处理</span></span><br><span class="line">				tf-&gt;regs[<span class="number">2</span>] = -E_NO_SYS;</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		tf-&gt;cp0_epc += <span class="number">4</span>; </span><br><span class="line">		<span class="comment">//栈针中cp0的epc寄存器加了一个字的长度，相当于返回用户进程时的pc会指向syscall的下一个指令</span></span><br><span class="line">		<span class="comment">//否则就会一直重复调用syscall，陷入死循环</span></span><br><span class="line">		</span><br><span class="line">		tf-&gt;regs[<span class="number">2</span>] = func(arg1, arg2, arg3, arg4, arg5);</span><br><span class="line">		<span class="comment">//把栈针中的 v0 寄存器置为内核的系统调用函数的返回值，这样返回用户进程的时候，用户程序可以从 v0 寄存器取得系统调用的返回值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Thinking-4-2"><a href="#Thinking-4-2" class="headerlink" title="Thinking 4.2"></a>Thinking 4.2</h3><p><code>envid2env</code> 这个函数当中最关键的由 <code>envid</code> 获取 <code>env</code> 结构体的代码为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// kern/env.c</span></span><br><span class="line"></span><br><span class="line">e = &amp;envs[ENVX(envid)];</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>ENVX</code> 是一个宏，作用是由 <code>envid</code> 获取到对应的进程控制块在控制块数组中的索引。其具体的实现方法是对 <code>envid</code> 取模，取其后 10 位二进制位作为索引。这就会引出一个问题：取模并不是一一映射的函数，很有可能出现不同的 <code>envid</code> 映射到相同的进程控制块的情况，因此需要对该 <code>envid</code> 进行检查。</p>
+<h3 id="Thinking-4-3"><a href="#Thinking-4-3" class="headerlink" title="Thinking 4.3"></a>Thinking 4.3</h3><p><code>mkenvid</code> 函数的定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// kern/env.c</span></span><br><span class="line"></span><br><span class="line">u_int <span class="title function_">mkenvid</span><span class="params">(<span class="keyword">struct</span> Env *e)</span> &#123;</span><br><span class="line">	<span class="type">static</span> u_int i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> ((++i) &lt;&lt; (<span class="number">1</span> + LOG2NENV)) | (e - envs);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，该函数维护了一个静态变量 <code>i</code> 作为计数器，每当需要分配进程号的时候，该计数器就会加1，然后左移 11 位（相当于乘以2048）。最后再把该值加上要分配进程号的进程控制块在整个进程控制块数组中的索引，就生成了最终的进程号。于是就能观察到，对于最开始的几个进程，不管其具体运行的程序是什么，其进程号总满足如下的序列：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2048 = 1 * 2048 + 0</span><br><span class="line">4097 = 2 * 2048 + 1</span><br><span class="line">6146 = 3 * 2048 + 2</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>至于为什么该函数不会返回0，我是这么想的：在 mos 的系统调用函数中，大多数都需要 envid 作为参数来确定执行该系统调用的对象。一方面这个参数不能被随意设置，不然用户程序就可以使用系统调用互相影响，导致整个系统无法管理；另一方面这个参数也不能没有，因为无法确定某个进程使用系统调用是用来改变自己的状态还是改变该进程的子进程的状态。为了解决这一点，就把 0 号进程预留为指向自己的进程号（类似于网络中的本地环回地址一样），每当用户程序执行系统调用时将进程号参数设置为 0，内核就知道该系统调用的作用对象为当前正在运行的进程。因此 <code>mkenvid</code> 函数就不会产生 0 作为真实的进程号。</p>
+<h3 id="Thinking-4-4"><a href="#Thinking-4-4" class="headerlink" title="Thinking 4.4"></a>Thinking 4.4</h3><p>C选项是正确的，fork 只在父进程中被调用了一次，在父进程正常产生返回值；而在子进程中，其从一开始就处在 fork 调用结束并且返回值设置为 0 的状态，并没有真正执行 fork 代码。</p>
+<h3 id="Thinking-4-5"><a href="#Thinking-4-5" class="headerlink" title="Thinking 4.5"></a>Thinking 4.5</h3><p>对于虚拟地址在 <code>USTACKTOP</code> 以下的部分，每个进程都不同，因此在 <code>fork</code> 的时候，父进程希望子进程能够完整的继承自己所有的状态，需要复制这些页面。</p>
+<p>对于 <code>USTACKTOP</code> 到 <code>UXSTACKTOP</code> 这一部分，包含了用户异常处理函数所要用到的栈的空间，这一部分在父子进程之间并不需要相同，因此不用映射。</p>
+<p>对于 <code>UXSTACKTOP</code> 到 <code>ULIM</code> 这一部分，包含了内核提供的供用户程序进行读取的进程页表、页控制快、进程控制块等信息。这些内容对于用户进程是只读的，而且在内核分配进程控制块 <code>env_alloc</code> 的时候就已经完成了相关的映射，所以用户态的 <code>fork</code> 函数也可以不管这一部分的内存。</p>
+<p>综上，<code>duppage</code> 函数需要负责映射的只有虚拟地址小于 <code>USTACKTOP</code> 的页面。</p>
+<h3 id="Thinking-4-6"><a href="#Thinking-4-6" class="headerlink" title="Thinking 4.6"></a>Thinking 4.6</h3><p>vpt 和 vpd 分别记录了在用户地址空间 kuseg 中，当前用户进程的页表虚拟地址基地址以及页目录虚拟地址基地址。使得当前的用户程序可以读取自身进程的页表项&#x2F;页目录项。在用户程序中，只需要用基地址加偏移量算出对应的页表项&#x2F;页目录项的地址后进行解引用即可读取进程的地址：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// user/lib/fork.c</span></span><br><span class="line"></span><br><span class="line">Pte* pte = vpt + VPN(va) <span class="comment">//根据va算出虚拟页号，再加上基地址进而算出页表项地址</span></span><br><span class="line">perm = PTE_FLAGS(*pte)   <span class="comment">//解引用获得真正的页表项，然后利用宏取得 perm 相关信息</span></span><br></pre></td></tr></table></figure>
+
+<p>在某一个进程初始化 <code>env_alloc()</code> 的时候，将当前进程从 vpt 开始的 4M 空间所对应的页目录项从自己映射到了自己。因此在访问这 4M 空间的时候，先根据页目录索引查询页目录项得到的二级页表仍是页目录本身，随后再根据页表索引查询二级页表（页目录自己）便能够直接得到对应的二级页表所在的物理页面。相当于用户进程在访问这 4M 空间内的时候，就可以直接获取到对应的二级页表的数据，而并不是根据二级页表的数据再去访问其他的物理页面。</p>
+<p>值得注意的是，我们并不希望用户进程具有更改页目录&#x2F;页表的能力，所以在用户空间中访问这些页表所在的物理页的时候，应该是只读的。这通过修改自映射的那条页目录项的可写权限位 <code>PTE_D</code> 为 0 来做到。</p>
+<h3 id="Thinking-4-7"><a href="#Thinking-4-7" class="headerlink" title="Thinking 4.7"></a>Thinking 4.7</h3><p>在 lab4 实验实现的用户态 <code>cow_entry()</code> 页写入异常处理函数所有的操作都在异常处理栈上进行，异常处理栈所在的页面不会被 <code>duppage()</code> 函数处理，因此不会产生页写入异常，不会产生异常的重入。但如果用户态的异常处理函数希望对处理的页面进行一些写入操作，那么可能就又会产生一次页写入异常，又会进入到内核所在的 <code>do_tlb_mod()</code> 函数中，此时Trapframe<code>的</code>$sp&#96; 寄存器所在位置处在用户异常处理栈中，进行了异常重入。</p>
+<p>在用户态执行处理函数时，无法访问到内核栈的数据，因此需要将发生异常的现场 Trapframe 拷贝到用户空间去以便用户异常处理程序进行读取。</p>
+<h3 id="Thinking-4-8"><a href="#Thinking-4-8" class="headerlink" title="Thinking 4.8"></a>Thinking 4.8</h3><p>在用户态处理页写入异常降低了某一个程序对内核的占用时间，使得内核能够处理其他进程的相关事务。并且在用户态处理灵活性较高，用户程序可以根据自身的需要来决定某个出现异常的页面的各种处理方法，而内核则相较而言难做到这一点。</p>
+<h3 id="Thinking-4-9"><a href="#Thinking-4-9" class="headerlink" title="Thinking 4.9"></a>Thinking 4.9</h3><p>假设 <code>exofork()</code> 的调用发生在 <code>syscall_set_tlb_mod_entry()</code> 的调用之前，则因为 <code>fork()</code> 函数运行时所在的栈并非是异常处理栈，而是普通的用户程序栈，其所在的页面有可能是之前的 <code>fork()</code> 产生的 COW 页面，此时当 <code>exofork()</code> 返回后，由于需要对 <code>child</code> 局部变量进行写入，便会产生 tlb mod 异常，</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// user/lib/fork.c</span></span><br><span class="line"></span><br><span class="line">child = syscall_exofork();</span><br><span class="line">... &lt;----------- 产生 tlb mod exception，但还未注册处理函数，用户程序崩溃</span><br><span class="line">try(syscall_set_tlb_mod_entry(<span class="number">0</span>, cow_entry));</span><br></pre></td></tr></table></figure>
+
+<p>但此时尚未注册处理函数，于是内核会发现内核态的 <code>do_tlb_mod()</code> 处理函数找不到对应的用户处理函数，程序便崩溃了。</p>
+<p><code>syscall_set_tlb_mod_entry()</code> 函数的调用也肯定不能放置在写时复制保护机制完成之后，在调用 <code>duppage()</code> 函数的过程中也涉及到对普通用户栈的页面进行写的操作，该页面也有可能是 COW 页面，此时也需要页写入异常处理函数 <code>cow_entry()</code> 进行处理。</p>
+<h2 id="难点分析"><a href="#难点分析" class="headerlink" title="难点分析"></a>难点分析</h2><p>我对于本次实验当中用户程序被操作系统内核加载并创建进程的方式很好奇，于是进行了如下探究：</p>
+<p>在 lab4 中，还没有实现文件系统和shell，因此用户态的程序无法通过外部的方法被操作系统装载和运行，操作系统目前能够使用的空间就只有 qemu 启动时分配的 64MB 物理内存。为了运行程序，操作系统必须要从这些物理内存上读取程序的内容然后再装载到进程里。查看 mos 中用于装载程序和创建进程的宏：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// include/env.h</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ENV_CREATE(x)                                                                              \</span></span><br><span class="line"><span class="meta">	(&#123;                                                                                         \</span></span><br><span class="line"><span class="meta">		extern u_char binary_##x##_start[];                                                \</span></span><br><span class="line"><span class="meta">		extern u_int binary_##x##_size;                                                    \</span></span><br><span class="line"><span class="meta">		env_create(binary_##x##_start, (u_int)binary_##x##_size, 1);                       \</span></span><br><span class="line"><span class="meta">	&#125;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//例：</span></span><br><span class="line"></span><br><span class="line">ENV_CREATE(user_fktest);</span><br><span class="line">--------展开为---------&gt;</span><br><span class="line">(</span><br><span class="line">  &#123; </span><br><span class="line">    <span class="keyword">extern</span> u_char binary_user_fktest_start[];</span><br><span class="line">  	<span class="keyword">extern</span> u_int binary_user_fktest_size;</span><br><span class="line">  	env_create(binary_user_fktest_start, (u_int)binary_user_fktest_size, <span class="number">1</span>); </span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>可以发现，当进程要装载某个用户程序的时候，需要得到该用户程序文件 (ELF 格式) 所在的一个二进制字节数组（<code>binary_##x##_start[]</code>) 的起始地址以及该二进制程序文件的大小，<code>binary_##x##_size</code>。由于这段代码是定义在内核函数里的，因此对应的这些符号也必须要能够最终在内核的可执行文件的符号表中找到，这就要求在编译链接内核的过程中，需要把这些数据（二进制字节数组、程序长度）也一同放入内核。</p>
+<p>此时再查看 <code>user</code> 文件夹，在正常的 <code>xxx.c</code> 程序文件之外，还有一些名为 <code>xxx.b.c</code> 的程序文件，打开它们：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// user/fktest.b.c</span></span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> binary_user_fktest_size = <span class="number">31576</span>;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">char</span> binary_user_fktest_start[] = &#123;<span class="number">0x7f</span>,<span class="number">0x45</span>,<span class="number">0x4c</span>,<span class="number">0x46</span>,<span class="number">0x1</span>,<span class="number">0x1</span>,<span class="number">0x1</span>,<span class="number">0x0</span>,<span class="number">0x0</span>,<span class="number">0x0</span>,<span class="number">0x0</span>,<span class="number">0x0</span>,<span class="number">0x0</span>,<span class="number">0x0</span>,<span class="number">0x0</span>,<span class="number">0x0</span>,<span class="number">0x2</span>,<span class="number">0x0</span>,<span class="number">0x8</span>,<span class="number">0x0</span>,<span class="number">0x1</span>,<span class="number">0x0</span>,<span class="number">0x0</span>,<span class="number">0x0</span>,<span class="number">0x60</span>,<span class="number">0x0</span>,<span class="number">0x40</span>,<span class="number">0x0</span>,...(还有很多)&#125;</span><br></pre></td></tr></table></figure>
+
+<p>发现这里出现了和刚才在内核代码文件中看到的一模一样的变量名，因此可以猜测这些文件就是要被链接进最终的内核可执行文件的 C 文件。为了验证该想法，继续查看真正控制内核编译链接的项目根目录下的 <code>Makefile</code>：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// Makefile</span><br><span class="line"></span><br><span class="line"><span class="keyword">ifeq</span> (<span class="variable">$(<span class="built_in">call</span> lab-ge,4)</span>,true)</span><br><span class="line">	user_modules    += user</span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"></span><br><span class="line">modules                 += <span class="variable">$(user_modules)</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$(mos_elf)</span>: <span class="variable">$(modules)</span> <span class="variable">$(target_dir)</span></span><br><span class="line">	<span class="variable">$(LD)</span> <span class="variable">$(LDFLAGS)</span> -o <span class="variable">$(mos_elf)</span> -N -T <span class="variable">$(link_script)</span> <span class="variable">$(objects)</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到，在 lab 4 的环境下，<code>user_modules</code> 变量会加入 <code>user</code> 文件夹，而 <code>user_modules</code> 变量又加入到了 <code>modules</code> 中，最终在生成 <code>mos</code> 的可执行文件 <code>mos_elf</code> 时 <code>user</code> 文件夹下的内容就会被链接。</p>
+<p>搞明白了用户程序是通过 xxx.b.c 这个 “二进制文件” 的 “C语言文件” 来被编译链接进入到内核的，那么这个 <code>xxx.b.c</code> 文件又是怎么回事？是怎么得到的？查看 <code>user</code> 文件夹下的 <code>Makefile</code> 文件：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">// user/Makefile</span><br><span class="line"></span><br><span class="line">INCLUDES    := -I../<span class="keyword">include</span> -Iinclude</span><br><span class="line"></span><br><span class="line">tools_dir   := ../tools</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> <span class="keyword">include</span>.mk</span><br><span class="line"></span><br><span class="line"><span class="section">.PRECIOUS: %.b %.b.c</span></span><br><span class="line"></span><br><span class="line"><span class="section">%.x: %.b.c</span></span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -c -o <span class="variable">$@</span> <span class="variable">$&lt;</span></span><br><span class="line"></span><br><span class="line"><span class="section">%.b.c: %.b</span></span><br><span class="line">	<span class="variable">$(tools_dir)</span>/bintoc -f <span class="variable">$&lt;</span> -o <span class="variable">$@</span> -p user</span><br><span class="line"></span><br><span class="line"><span class="section">%.b: %.o <span class="variable">$(USERLIB)</span></span></span><br><span class="line">	<span class="variable">$(LD)</span> -o <span class="variable">$@</span> <span class="variable">$(LDFLAGS)</span> -T ./user.lds <span class="variable">$^</span></span><br><span class="line"></span><br><span class="line"><span class="section">%.o: %.c</span></span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> <span class="variable">$(INCLUDES)</span> -c -o <span class="variable">$@</span> <span class="variable">$&lt;</span></span><br><span class="line"></span><br><span class="line"><span class="section">%.o: %.S</span></span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> <span class="variable">$(INCLUDES)</span> -c -o <span class="variable">$@</span> <span class="variable">$&lt;</span></span><br><span class="line"></span><br><span class="line"><span class="section">%.o: lib.h</span></span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: all clean</span></span><br><span class="line"></span><br><span class="line"><span class="section">all: <span class="variable">$(INITAPPS)</span> <span class="variable">$(USERAPPS)</span> <span class="variable">$(USERLIB)</span></span></span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	rm -rf *~ *.o *.b.c *.x *.b lib/*.o</span><br></pre></td></tr></table></figure>
+
+<p>通过对依赖关系的分析，可以得到如下的构建顺序：</p>
+<ol>
+<li><p>首先由 <code>.c</code> 文件和 <code>.S</code> 文件编译生成 <code>.o</code> 目标文件</p>
+</li>
+<li><p>然后经过链接器的链接，生成 <code>.b</code> 二进制的可执行文件</p>
+</li>
+<li><p>最重要的一步，通过 <code>$(tools_dir)/bintoc</code> 这个工具程序把上一步生成的二进制的可执行 <code>.b</code> 文件的文件内容以字节数组的形式显式地记录在对应名字的 <code>.b.c</code> 文件中</p>
+<p>举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ cd user</span><br><span class="line">$ hd -n 100 fktest.b</span><br><span class="line">00000000  7f 45 4c 46 01 01 01 00  00 00 00 00 00 00 00 00  |.ELF............|</span><br><span class="line">00000010  02 00 08 00 01 00 00 00  60 00 40 00 34 00 00 00  |........`.@.4...|</span><br><span class="line">00000020  b0 78 00 00 01 10 00 50  34 00 20 00 04 00 28 00  |.x.....P4. ...(.|</span><br><span class="line">00000030  11 00 10 00 03 00 00 70  b8 25 00 00 f8 24 40 00  |.......p.%...$@.|</span><br><span class="line">00000040  f8 24 40 00 18 00 00 00  18 00 00 00 04 00 00 00  |.$@.............|</span><br><span class="line">00000050  08 00 00 00 00 00 00 70  a0 25 00 00 e0 24 40 00  |.......p.%...$@.|</span><br><span class="line">00000060  e0 24 40 00                                       |.$@.|</span><br><span class="line">00000064</span><br><span class="line">$ ls -la fktest.b</span><br><span class="line">-rwxrwxrwx 1 root root 31576  4月 23 13:53 fktest.b</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>hd</code> 工具以及 <code>ls</code> 工具对 <code>fktest.b</code> 文件的内容以及大小进行输出，与 <code>fktest.b.c</code> 的文件内容比对，验证了上述说法。</p>
+</li>
+<li><p>再对 <code>.b.c</code> 文件进行编译，生成最终可以被链接进入内核可执行文件的目标文件</p>
+</li>
+</ol>
+<p>综上，我终于搞明白了在 <code>user</code> 目录下写的一个 <code>.c</code> 程序是怎么被装载到 mos 上作为一个用户程序运行的了。</p>
+<h2 id="心得体会"><a href="#心得体会" class="headerlink" title="心得体会"></a>心得体会</h2><p>在 lab 3 中，我只认识到系统当中有很多的进程在运行，并且需要由操作系统内核来进行管理。但是对于这些进程之间的关系、用户程序和内核程序之间的关系等等没有搞懂。</p>
+<p>在 lab 4 真正实现了 syscall 和进程间通讯之后，我才对这些概念有了较为完整的理解。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/02/Lab3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/05/02/Lab3/" class="post-title-link" itemprop="url">Lab3</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-05-02 02:27:02 / Modified: 02:27:36" itemprop="dateCreated datePublished" datetime="2024-05-02T02:27:02+00:00">2024-05-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Lab3-实验报告"><a href="#Lab3-实验报告" class="headerlink" title="Lab3 实验报告"></a>Lab3 实验报告</h1><h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><h3 id="Thinking-3-1"><a href="#Thinking-3-1" class="headerlink" title="Thinking 3.1"></a>Thinking 3.1</h3><p>首先，这句语句的目的是为了让每个用户进程都能够在<code>kuseg</code>空间下以只读方式访问该进程的页表。而为了实现这一点，就需要对这个进程的页目录（即 <code>e-&gt;env_pgdir</code>）进行修改，使其把对应的 <code>kuseg</code> 中的虚拟地址映射到存放真实的页表的物理地址去。</p>
+<p>考虑一下访存的过程：假设用户对于某一个页表在 kuseg 里的虚拟地址发起了访存请求，此时会找到页目录，以该虚拟地址的前十位作为索引，在页目录中找到一个二级页表，然后再以虚拟地址的接下来10位作为页表的偏移量，在这个二级页表里面找到对应的物理页。而我们希望这个找到的物理页就是二级页表，因此刚才映射到这个物理页的那个二级页表就应该是该进程的页目录，也就是说，在映射把进程的页表映射到用户空间时，我们需要通过页目录来找到页目录！</p>
+<p>映射的页表在用户空间中占用的总大小为 <code>4MB</code>，其地址前十位不变化，因此页目录中的索引不发生变化，为 <code>PDX(UVPT)</code>，只需要一个页目录项。我们希望该页目录项能够映射回页目录，因此该页目录项前20位为页目录的物理页框号，即 <code>PADDR(e-&gt;env_pgdir)</code>，并且别忘了在标记位上将该项设为有效。由此，便得到了最终的页目录项</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PADDR(e-&gt;env_pgdir) | PTE_V</span><br></pre></td></tr></table></figure>
+
+<h3 id="Thinking-3-2"><a href="#Thinking-3-2" class="headerlink" title="Thinking 3.2"></a>Thinking 3.2</h3><p>在 load_icode 这个函数中出现了对于 elf_load_seg 函数的调用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">elf_load_seg(ph, binary + ph-&gt;p_offset, load_icode_mapper, e)</span><br></pre></td></tr></table></figure>
+
+<p>可以看出来，对应的 <code>void* data</code> 参数的位置上被填入了 <code>struct Env* e</code>，即进程控制块的结构体指针。继续查看<code>elf_load_seg</code> 函数发现，其把 <code>data</code> 这个参数传入了回掉函数 <code>map_page</code> 中，而在该函数的函数体的其他地方则看不到对于 <code>data</code> 参数的使用，因此需要继续分析回调函数。查看<code>load_icode_mapper</code> 函数（<code>map_page</code>函数的一个实现）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">struct Env *env = (struct Env *)data;</span><br></pre></td></tr></table></figure>
+
+<p>首先其由data参数获取了正在加载程序的进程对应的进程控制块，然后</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return page_insert(env-&gt;env_pgdir, env-&gt;env_asid, p, va, perm);</span><br></pre></td></tr></table></figure>
+
+<p>再基于该进程控制块提供的相关信息（页目录地址，asid号）完成了页面的初始化与映射操作。同时，由于修改页表的时候必须要知道页目录的地址、进行tlb重填的时候必须要知道进程的asid号，这个参数是必须的，不能省略。</p>
+<h3 id="Thinking-3-3"><a href="#Thinking-3-3" class="headerlink" title="Thinking 3.3"></a>Thinking 3.3</h3><p>首先要加载的<code>section</code>开始的地方不一定是按照页面对齐的，因此在分配物理页面和拷贝数据时，需要增加一个<code>offset</code>。如果该<code>offset</code>为0，则就不需要考虑不对齐分配的问题。</p>
+<p>并且需要考虑到整个<code>section</code>的大小会不会超出一个<code>page</code>，如果不会超出，则后续不需要进行分配；如果超出了<code>section</code>的大小超出了第一个<code>page</code>的范围，则后续仍需要继续进行分配</p>
+<p>随后继续分配物理页面，直到分配的物理页面已经包含了文件的所有内容。值得注意的是，文件结束的位置的虚拟地址也可能并不是页面对齐的，但是这并不影响物理页的分配，因为哪怕该文件在页面中只占1字节的信息，也需要分配物理页面，因此在循环时只需要关注是否包含了全部的文件即可。</p>
+<p>最后对于某些程序而言，其需要的内存空间 <code>sgsize</code> 大于其文件的所占空间 <code>binsize</code>，因此需要分配空白页面来填补这一些空间，同样的进行循环分配，直到已分配的空间达到要求即可。</p>
+<h3 id="Thinking-3-4"><a href="#Thinking-3-4" class="headerlink" title="Thinking 3.4"></a>Thinking 3.4</h3><p>mips 4KC cpu发出的全部都是虚拟地址，并且 pc 寄存器中存放的也是虚拟地址，因此在这里 <code>env_tf.cp0_epc</code> 一定存储的是虚拟地址</p>
+<h3 id="Thinking-3-5"><a href="#Thinking-3-5" class="headerlink" title="Thinking 3.5"></a>Thinking 3.5</h3><p>编号为0，1，2，3的异常处理函数全都在 <code>kern/genex.S</code> 中进行了定义，对于0号异常处理函数，即中断的处理函数，进行了显式的定义，在中断异常来临时，如果cp0中的寄存器符合要求，就对进程进行重新调度：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">NESTED(handle_int, TF_SIZE, zero)</span><br><span class="line">	mfc0    t0, CP0_CAUSE</span><br><span class="line">	mfc0    t2, CP0_STATUS</span><br><span class="line">	and     t0, t2</span><br><span class="line">	andi    t1, t0, STATUS_IM7</span><br><span class="line">	bnez    t1, timer_irq     //如果符合要求的就重新schedule</span><br><span class="line">timer_irq:</span><br><span class="line">	li      a0, 0</span><br><span class="line">	j       schedule</span><br><span class="line">END(handle_int)</span><br></pre></td></tr></table></figure>
+
+<p>而对于其他三个异常处理函数，则采用了 BUILD_HANDLER 宏进行定义：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">.macro BUILD_HANDLER exception handler</span><br><span class="line">NESTED(handle_\exception, TF_SIZE + 8, zero)</span><br><span class="line">	move    a0, sp</span><br><span class="line">	addiu   sp, sp, -8</span><br><span class="line">	jal     \handler</span><br><span class="line">	addiu   sp, sp, 8</span><br><span class="line">	j       ret_from_exception</span><br><span class="line">END(handle_\exception)</span><br><span class="line">.endm</span><br><span class="line"></span><br><span class="line">BUILD_HANDLER tlb do_tlb_refill </span><br><span class="line"></span><br><span class="line">#if !defined(LAB) || LAB &gt;= 4</span><br><span class="line">BUILD_HANDLER mod do_tlb_mod</span><br><span class="line">BUILD_HANDLER sys do_syscall</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">BUILD_HANDLER reserved do_reserved</span><br></pre></td></tr></table></figure>
+
+<p>因此，实际上 <code>handle_tlb</code> 异常处理函数对应 <code>do_tlb_refill</code> 函数，<code>handle_mod</code> 异常处理函数对应 <code>do_tlb_mod</code> 函数，<code>handle_sys</code> 异常处理函数对应 <code>do_syscall</code> 函数 <code>handle_reserved</code> 异常处理函数对应 <code>do_reserved</code> 函数</p>
+<h3 id="Thinking-3-6"><a href="#Thinking-3-6" class="headerlink" title="Thinking 3.6"></a>Thinking 3.6</h3><p>首先 <code>entry.S</code> 文件中存放所有的异常中断都会进入的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//entry.S</span><br><span class="line">exc_gen_entry:</span><br><span class="line">	SAVE_ALL</span><br><span class="line">	mfc0    t0, CP0_STATUS</span><br><span class="line">	and     t0, t0, ~(STATUS_UM | STATUS_EXL | STATUS_IE) //禁止了中断</span><br><span class="line">	mtc0    t0, CP0_STATUS</span><br><span class="line">	mfc0    t0, CP0_CAUSE </span><br><span class="line">	andi    t0, 0x7c      </span><br><span class="line">	lw      t0, exception_handlers(t0) </span><br><span class="line">	jr      t0   </span><br></pre></td></tr></table></figure>
+
+<p>可见，在处理任何异常\中断期间，中断处于关闭状态，时钟中断无法生效。</p>
+<p>这一点可以在异常处理函数中看出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//genex.S</span><br><span class="line">NESTED(handle_int, TF_SIZE, zero)</span><br><span class="line">	mfc0    t0, CP0_CAUSE</span><br><span class="line">	mfc0    t2, CP0_STATUS</span><br><span class="line">	and     t0, t2</span><br><span class="line">	andi    t1, t0, STATUS_IM7 //检查IM7 bit是否置高</span><br><span class="line">	bnez    t1, timer_irq</span><br><span class="line">timer_irq:</span><br><span class="line">	li      a0, 0</span><br><span class="line">	j       schedule</span><br><span class="line">END(handle_int)</span><br></pre></td></tr></table></figure>
+
+<p>随后，在 <code>env_asm.S</code> 中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">LEAF(env_pop_tf)</span><br><span class="line">.set reorder</span><br><span class="line">.set at</span><br><span class="line">	mtc0    a1, CP0_ENTRYHI</span><br><span class="line">	move    sp, a0</span><br><span class="line">	RESET_KCLOCK </span><br><span class="line">	j       ret_from_exception //该函数会恢复现场，并且也把CP0中的STATUS寄存器的IM7位置高</span><br><span class="line">END(env_pop_tf)</span><br></pre></td></tr></table></figure>
+
+<p>时钟中断再一次被打开。</p>
+<p>总结下来就是 <code>kernel</code> 异常处理期间时钟中断关闭，回到用户态后时钟中断被打开。</p>
+<h3 id="Thinking-3-7"><a href="#Thinking-3-7" class="headerlink" title="Thinking 3.7"></a>Thinking 3.7</h3><p>发生时钟中断以后，cpu会自动跳转至相应的异常处理程序，并且设置cp0的相关寄存器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//entry.S</span><br><span class="line">.section .text.tlb_miss_entry</span><br><span class="line">tlb_miss_entry:</span><br><span class="line">	j       exc_gen_entry</span><br><span class="line"></span><br><span class="line">.section .text.exc_gen_entry</span><br><span class="line">exc_gen_entry:</span><br><span class="line">	SAVE_ALL</span><br><span class="line">	mfc0    t0, CP0_STATUS</span><br><span class="line">	and     t0, t0, ~(STATUS_UM | STATUS_EXL | STATUS_IE)</span><br><span class="line">	mtc0    t0, CP0_STATUS</span><br><span class="line">	mfc0    t0, CP0_CAUSE  </span><br><span class="line">	andi    t0, 0x7c       </span><br><span class="line">	lw      t0, exception_handlers(t0) </span><br><span class="line">	jr      t0   </span><br></pre></td></tr></table></figure>
+
+<p>在这里，读取 CPU 自动设置的 CP0 寄存器的相关信息，了解到这是一次时钟中断异常，通过中断向量跳转到特定的处理函数，即 <code>handle_int</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//genex.S</span><br><span class="line">NESTED(handle_int, TF_SIZE, zero)</span><br><span class="line">	mfc0    t0, CP0_CAUSE</span><br><span class="line">	mfc0    t2, CP0_STATUS</span><br><span class="line">	and     t0, t2</span><br><span class="line">	andi    t1, t0, STATUS_IM7</span><br><span class="line">	bnez    t1, timer_irq</span><br><span class="line">timer_irq:</span><br><span class="line">	li      a0, 0</span><br><span class="line">	j       schedule</span><br><span class="line">END(handle_int)</span><br></pre></td></tr></table></figure>
+
+<p>然后在这里调用 <code>schedule</code> 函数来进行进程的切换：维护 <code>env_sched_list</code> 链表、维护时间片变量。然后交由 <code>env_run</code> 运行进程，返回至用户态。这样就完成了一次进程的调度&#x2F;切换</p>
+<h2 id="难点分析"><a href="#难点分析" class="headerlink" title="难点分析"></a>难点分析</h2><p>在这次lab3的学习过程中，我主要遇到了以下这些问题：</p>
+<h3 id="有关物理内存大小与page2kva函数的有效范围的问题"><a href="#有关物理内存大小与page2kva函数的有效范围的问题" class="headerlink" title="有关物理内存大小与page2kva函数的有效范围的问题"></a>有关物理内存大小与page2kva函数的有效范围的问题</h3><p>在Lab3中，需要我们补全<code>load_icode_mapper</code>函数，以便能够在加载程序的二进制镜像时可以创建物理页并且把相应的数据拷贝至新增的物理页。<br>该过程共分为三步</p>
+<ol>
+<li>分配一个新的物理页，获得其页控制块</li>
+<li>复制所需要的数据至新分配的物理页</li>
+<li>将给定的虚拟地址到该物理页的映射写入当前进程的二级页表系统中</li>
+</ol>
+<p>我的疑问出现在第二步：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* Step 2: If &#x27;src&#x27; is not NULL, copy the &#x27;len&#x27; bytes started at &#x27;src&#x27; into &#x27;offset&#x27; at this page. */</span><br><span class="line">// Hint: You may want to use &#x27;memcpy&#x27;.</span><br><span class="line">if (src != NULL) &#123;</span><br><span class="line">    /* Exercise 3.5: Your code here. (2/2) */</span><br><span class="line">    memcpy(page2kva(p)+offset,src,len);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>框架代码提示我们应该使用 <code>memcpy</code> 来进行内存内容的拷贝。<code>memcpy</code> 函数是利用指针来进行实现的，循环将源地址指向的数据拷贝到目标地址指向的空间中。同时又考虑到在mips 4KC cpu中，由于 CPU 发出的地址都是虚拟地址，因此所有 C 语言以及汇编语句中出现的相关地址都是虚拟地址。那么为了把数据拷贝到新的物理页面中去，我们就需要获知这个物理页面的虚拟地址。这里就出现了问题，即然页表的写入还未完成，那么如何确定其虚拟地址？</p>
+<p>正确的操作应该是先获取该物理页面的物理地址，然后直接转换为内核态虚拟地址（这个转换不需要页表参与，是简单的线性映射），这样 CPU 就能够对该页面进行读写。我当时在这里产生疑问的主要原因是因为我认为这里的物理页只能够由用户态的虚拟地址访问到，而不能被内核态虚拟地址访问到，但实际证明这个想法是不对的。</p>
+<p>在实验中，MOS 操作系统可用的物理内存大小为 <code>65536 KiB</code> 也即 <code>64 MiB</code>，查看 <code>mmu.h</code> 可以知道 <code>kseg0</code> 空间起始于 <code>0x80000000</code>，大小共 <code>512 MiB</code> ，因此所有的物理内存其实在内核态都得到了映射，CPU可以通过发出内核态的虚拟地址来访问任何的物理内存，这样，就相当于 CPU 直接对物理内存进行了读写。同时也因为 <code>kseg0</code> 大小的限制，MOS 操作系统的物理内存上限为 <code>512 MiB</code>，超出该部分的内存不在 <code>kseg0</code> 的映射范围内，而 CPU 又无法直接发出物理地址，因此无法利用到这一部分内存。</p>
+<h3 id="有关进程调度相关的问题"><a href="#有关进程调度相关的问题" class="headerlink" title="有关进程调度相关的问题"></a>有关进程调度相关的问题</h3><p>在 <code>kern/sched.c</code> 中定义了进程的调度函数 <code>schedule</code>，其接受一个参数 <code>yield</code> 作为是否强制打断当前进程执行的标志。</p>
+<p>在编写这个函数的过程中，我遇到了几个问题：</p>
+<ol>
+<li><p><code>count</code> 变量的意义是什么：在 mos 中，采用时间片轮转来调度并运行不同的进程，而 <code>count</code> 则用于指示当前进程还剩余多少时间片。这里就出现了一个问题，为什么要把 <code>count</code> 变量设置在 <code>schedule</code> 函数内部作为一个静态变量，而不是将其直接写入进程的管理块中？我的想法是，进程分配到的时间片是在运行时的一个临时属性，并不属于进程的内秉属性，因此不应该直接写入进程控制块中。对于进程，其有可能在系统负载不同时，被分配到的时间片不同；而且当进程不处在 <code>runnable</code> 状态的时候，也不存在所谓时间片的概念。我认为更重要的是，进程的生命周期并不由 <code>count</code> 变量来指明，当 <code>count</code> 等于 0 的时候，只能说明这个进程的时间片用完了，应该切换进程了，但这并不代表这个进程就已经全部执行完毕了。这一段逻辑在 <code>shedule</code> 函数里也有体现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">else if (yield || count == 0 || e-&gt;env_status != ENV_RUNNABLE) &#123; </span><br><span class="line">	  //如果当前进程不能够继续占用cpu，就进行调度</span><br><span class="line">		...</span><br><span class="line">		else if (e-&gt;env_status == ENV_RUNNABLE) &#123;  </span><br><span class="line">        //不继续占用cpu不代表不能执行，说不定某个计算任务所耗时间较多</span><br><span class="line">        //整个进程还没有执行结束，后面还是需要被调度执行</span><br><span class="line">        TAILQ_REMOVE(&amp;env_sched_list, e, env_sched_link); //将当前进程从调度列表的头删除</span><br><span class="line">        TAILQ_INSERT_TAIL(&amp;env_sched_list, e, env_sched_link); //插入到调度列表尾部等以后调度</span><br><span class="line">		&#125;</span><br><span class="line">		...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这同时也解释了为什么要把进程的 <code>env_pri</code> 优先级变量赋值给 <code>count</code> 变量：优先级高的进程在一次调度后所占用的cpu时间也应该更多，而负责管控进程运行的时间片数量的 <code>count</code> 变量正好反映了这一点。</p>
+</li>
+<li><p>关于进程的停止问题：</p>
+<p>当 MOS 内核初始化时，会把所有的进程控制块的状态设置为 ENV_FREE：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//  kern/env.c/env_init()</span><br><span class="line"></span><br><span class="line">for (unsigned i = 0;i &lt; NENV;i++) &#123;</span><br><span class="line">		// i from 0 to NENV - 1</span><br><span class="line">		// NENV - 1 - i from NENV-1 to 0</span><br><span class="line">  	envs[NENV-1-i].env_status = ENV_FREE; //设置第 NENV-1-i 个进程控制块的状态为 free</span><br><span class="line">  	LIST_INSERT_HEAD(&amp;env_free_list, &amp;(envs[NENV-1-i]), env_link);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样在后面创建用户进程的时候，会把创建出来的用户进程的状态设置为 ENV_RUNNABLE：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//  kern/env.c/</span><br><span class="line"></span><br><span class="line">struct Env *env_create(const void *binary, size_t size, int priority) &#123;</span><br><span class="line">    struct Env *e;</span><br><span class="line"></span><br><span class="line">    env_alloc(&amp;e, 0);</span><br><span class="line"></span><br><span class="line">    e-&gt;env_pri = priority;</span><br><span class="line">    e-&gt;env_status = ENV_RUNNABLE; //设置进程状态为 ENV_RUNNABLE</span><br><span class="line"></span><br><span class="line">    load_icode(e, binary, size);</span><br><span class="line">    TAILQ_INSERT_HEAD(&amp;env_sched_list, e, env_sched_link);</span><br><span class="line"></span><br><span class="line">    return e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>并且把该进程加入到进程的调度列表中去。</p>
+<p>在 <code>env.h</code> 这个头文件中，实际对于进程定义了三种状态，除了上述两种状态外，还有 <code>ENV_NOT_RUNNABLE</code> 这个状态。我原本以为操作系统是通过把进程设置为该状态然后由 <code>schedule</code> 函数删除调度列表中的该进程来实现的线程终止，但是经过搜索后会发现，在整个的项目文件中，并没有任何一条语句显式地把进程的状态设置为  <code>ENV_NOT_RUNNABLE</code>，因此线程的终止一定另有方式。</p>
+<p>查看 <code>env_run</code> 线程运行的代码我们会发现有这样的一个宏：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// kern/env.c/env_run()</span><br><span class="line"></span><br><span class="line">#ifdef MOS_PRE_ENV_RUN</span><br><span class="line">	MOS_PRE_ENV_RUN_STMT</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+
+<p>当 <code>MOS_PRE_ENV_RUN</code> 有定义的时候，将 <code>MOS_PRE_ENV_RUN_STMT</code> 所定义的内容复制到这里来。</p>
+<p>在 <code>mk</code> 文件夹下有 <code>test.mk</code> 文件，其中的一部分内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// mk/test.mk</span><br><span class="line">ifneq ($(pre-env-run),)</span><br><span class="line">		CFLAGS += -DMOS_PRE_ENV_RUN=&quot;$(pre-env-run)&quot;</span><br><span class="line">		ifneq ($(pre-env-run-stmt),)</span><br><span class="line">				CFLAGS += -DMOS_PRE_ENV_RUN_STMT=$(pre-env-run-stmt)</span><br><span class="line">		else</span><br><span class="line">				CFLAGS += -DMOS_PRE_ENV_RUN_STMT=&quot;pre_env_run(e);&quot;</span><br><span class="line">		endif</span><br><span class="line">endif</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>test</code> 文件夹中字文件夹 <code>lab3_4</code> 下，有 <code>kernel.mk</code> 文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//  test/lab3_4/kernel.mk</span><br><span class="line"></span><br><span class="line">init-envs := quick_sort/1 quick_sort/2 quick_sort/3</span><br><span class="line">pre-env-run := $(test_dir)/pre_env_run.c</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，在这里定义了 <code>per-env-run</code> 变量，但没有定义 <code>pre-env-run-stmt</code> 变量，因此在 <code>test.mk</code> 中，就会得到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS += -DMOS_PRE_ENV_RUN_STMT=&quot;pre_env_run(e);&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这个结果。在编译时会预定义 <code>MOS_PRE_ENV_RUN_STMT</code> 这个宏为 <code>pre_env_run(e)</code>。</p>
+<p>接下来去查看 <code>pre_env_run</code> 这个函数，其定义在 <code>test/lab3_4/pre_env_run.c</code> 中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//  test/lab3_4/pre_env_run.c </span><br><span class="line"></span><br><span class="line">static inline void pre_env_run(struct Env *e) &#123;</span><br><span class="line">		struct Trapframe *tf = (curenv == e) ? (struct Trapframe *)KSTACKTOP - 1 : &amp;e-&gt;env_tf;</span><br><span class="line">		u_int epc = tf-&gt;cp0_epc;</span><br><span class="line">    if (epc == 0x400180) &#123;</span><br><span class="line">        printk(&quot;env %08x reached end pc: 0x%08x, $v0=0x%08x\n&quot;, e-&gt;env_id, epc,</span><br><span class="line">               tf-&gt;regs[2]);</span><br><span class="line">        env_destroy(e);</span><br><span class="line">        schedule(0);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以发现，这个 <code>pre_env_run</code> 函数在调度之后，系统从内核态返回到用户态之前进行了一个检查，检查当前 <code>trapframe</code> 中的<code>epc</code> 是否已经到了<code>end_pc</code>，即程序停止的标志。如果已经到了停止pc，那么就调用 <code>env_destroy</code> 函数销毁当前的进程然后再去调度其他的进程，这样就实现了进程的停止。</p>
+<p>值得注意的是，在进程销毁的过程中，应该大体上是进程创建的逆过程，：归还<code>asid</code>、进程<code>id</code>等资源，进行物理页面的释放，页表的释放，进程控制块的重制（状态的重制等），以及 tlb 相关的操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//  kern/env.c</span><br><span class="line"></span><br><span class="line">void env_destroy(struct Env *e) &#123;</span><br><span class="line">		//释放进程 e 相关的资源</span><br><span class="line">		env_free(e);</span><br><span class="line"></span><br><span class="line">    if (curenv == e) &#123; </span><br><span class="line">        //如果当前运行的进程就是要结束的进程，就强制杀死该进程(yield = 1)，把cpu资源让给其他进程</span><br><span class="line">        curenv = NULL;</span><br><span class="line">        printk(&quot;i am killed ... \n&quot;);</span><br><span class="line">        schedule(1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="心得体会"><a href="#心得体会" class="headerlink" title="心得体会"></a>心得体会</h2><p>在编写本次lab的时候，我深感调试的重要性。一个强大且有效的调试工具真的能节省非常多的时间。如果把程序视作状态机，那么出现bug的原因就一定是状态机出现了错误的状态转移。在程序正常执行的时候，由于cpu的时间非常快，程序这个状态机可能一秒就发生了千万次的状态转移，要精准定位到出现错误的那一次转移过程是非常困难的。而调试工具的单步执行特性能够解决该问题，我们只需要使用二分法，就可以逐渐逼近出现错误的那一次转移（对于系统编程而言，可能是一条汇编指令），进而解决问题。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
